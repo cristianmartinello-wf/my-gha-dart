@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  schedule:
+    # At 10:00 (GMT) 04:00 (CST) every Friday
+    - cron: '0 10 * * mon,wed'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: small-al2023
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Workiva/gha-setup-credentials@v2.0.9
+      - run: python ./set-automerge-all.py

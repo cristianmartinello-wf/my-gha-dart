@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "master"
+      - "experiments/**/*"
+      - "_integration/**/*"
+    tags:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: small-al2023
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Workiva/gha-setup-credentials@v2.0.9
+      - uses: Workiva/gha-create-pr@v1 # this will create the PR allowed to auto-merge
